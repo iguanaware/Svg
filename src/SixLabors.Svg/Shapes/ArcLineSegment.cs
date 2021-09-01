@@ -1,5 +1,5 @@
-﻿using SixLabors.Primitives;
-using SixLabors.Shapes;
+﻿using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Drawing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Text;
 
 namespace SixLabors.Svg.Shapes
 {
-    public class ArcLineSegemnt : SixLabors.Shapes.ILineSegment
+    public class ArcLineSegemnt : ILineSegment
     {
         private ILineSegment[] innerSegments;
 
@@ -21,9 +21,9 @@ namespace SixLabors.Svg.Shapes
         { }
         public PointF EndPoint => this.innerSegments.Last().EndPoint;
 
-        public IReadOnlyList<PointF> Flatten()
+        public ReadOnlyMemory<PointF> Flatten()
         {
-            return this.innerSegments.SelectMany(x => x.Flatten()).ToList();
+            return new ReadOnlyMemory<PointF>( this.innerSegments.SelectMany<ILineSegment,PointF>(x => x.Flatten().ToArray().Select(x1=>x1)).ToArray());
         }
 
         public ILineSegment Transform(Matrix3x2 matrix)

@@ -1,4 +1,5 @@
 ﻿using SixLabors.Fonts;
+using SixLabors.ImageSharp.Drawing;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.Shapes;
 using SVGSharpie;

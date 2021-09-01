@@ -6,12 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-dev002362" />
-    <PackageReference Include="SixLabors.Shapes" Version="1.0.0-dev000112" />
-    <PackageReference Include="SixLabors.Shapes.Text" Version="1.0.0-dev000112" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\..\ImageSharp.Drawing\src\ImageSharp.Drawing\ImageSharp.Drawing.csproj" />
+    <ProjectReference Include="..\..\..\ImageSharp\src\ImageSharp\ImageSharp.csproj" />
     <ProjectReference Include="..\..\external\SVGSharpie\SVGSharpie.Svg\SVGSharpie.csproj" />
   </ItemGroup>
 

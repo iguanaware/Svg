@@ -1,4 +1,6 @@
-﻿using SixLabors.Primitives;
+﻿using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Drawing;
+using SixLabors.Primitives;
 using SixLabors.Shapes;
 using System;
 using System.Collections.Generic;

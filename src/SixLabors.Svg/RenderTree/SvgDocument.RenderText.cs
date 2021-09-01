@@ -4,11 +4,9 @@ using System.Text;
 using System.Threading.Tasks;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Drawing;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
-using SixLabors.Primitives;
-using SixLabors.Shapes;
-using SixLabors.Shapes.Text;
 using SixLabors.Svg.Shapes;
 using SVGSharpie;
 
@@ -25,7 +23,7 @@ namespace SixLabors.Svg.Dom
             base.VisitTextElement(element);
 
             var fonts = SystemFonts.Collection;
-            FontFamily family = null;
+            FontFamily family;//=  null;
 
             foreach (var f in element.Style.FontFamily.Value)
             {
@@ -39,7 +37,7 @@ namespace SixLabors.Svg.Dom
                     fontName = DefaultSerifFont;
                 }
 
-                if (fonts.TryFind(fontName, out family))
+                if (fonts.TryGet(fontName, out family))
                 {
                     break;
                 }
@@ -47,7 +45,7 @@ namespace SixLabors.Svg.Dom
 
             if (family == null)
             {
-                family = fonts.Find(DefaultFont);
+                family = fonts.Get(DefaultFont);
             }
 
             var fontSize = element.Style.FontSize.Value.Value;
@@ -59,7 +57,7 @@ namespace SixLabors.Svg.Dom
             var text = visitor.Text;
 
             // offset by the ascender to account for fonts render origin of top left
-            var ascender = ((font.Ascender * font.Size) / (font.EmSize * 72)) * 72;
+            var ascender = ((font.FontMetrics.Ascender * font.Size) / (font.FontMetrics.UnitsPerEm * 72)) * 72;
 
             var render = new RendererOptions(font, 72, origin - new PointF(0, ascender))
             {
